@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\EjerciciosController;
+use App\Http\Controllers\MarcasController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,3 +40,18 @@ Route::post('/login',[SessionsController::class,'store'])
 Route::get('/logout',[SessionsController::class,'destroy'])
 ->middleware('auth')
 ->name('login.destroy');
+
+
+/*Route::get('/ejercicios',[EjerciciosController::class,'index'])
+->name('ejercicio.index');
+
+Route::get('/ejercicios/create',[EjerciciosController::class,'create'])
+->name('ejercicio.create');
+
+Route::post('/ejercicios/store',[EjerciciosController::class,'store'])
+->name('ejercicio.store');
+
+Route::delete('ejercicios/destroy', [EjerciciosController::class,'destroy'])->name('ejercicio.destroy');*/
+
+Route::resource('ejercicios', EjerciciosController::class)->middleware('auth');
+Route::resource('marcas', MarcasController::class)->middleware('auth');
