@@ -16,7 +16,9 @@ class CreateMarcasTable extends Migration
         Schema::create('marcas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-
+            //rep is the fild where the usser put their marc in casual gym annotation, where you indicate ur mark in Kg divided with X's , example: 12x15x20 that means
+            // that ur first attempt u get 12kg, the second one you get 15 kg, and the third one you get 20 
+            $table->string('rep');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('ejercicio_id');
            
@@ -29,7 +31,7 @@ class CreateMarcasTable extends Migration
                     ->references('id')
                     ->on('ejercicios');
           
-                    $table->string('rep');
+                  
         });
     }
 
