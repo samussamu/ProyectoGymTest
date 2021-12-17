@@ -64,3 +64,24 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+ **Descripción del proyecto.**
+ 
+ Proyecto de prueba para reforzar laravel, y recapitular sun funciones basicas, de momento consta de un login/register con un crud , donde los usuarios pueden crear ejercicios,y añadir marcas sobre estos, no es ningun proyecto serio, esta realizado con mera funcion formativa. 
+ 
+  **Relación tablas SQL del proyecto.**
+  
+  ![Tablas](https://user-images.githubusercontent.com/44868248/146406996-7282b353-e2cc-4ae5-8bd8-1b525e803c9b.png)
+
+
+ **Imagen crud del proyecto.**
+ 
+ ![ejercicios](https://user-images.githubusercontent.com/44868248/146406909-8c41bee4-0542-4e9d-ba2a-32de36af03bf.JPG)
+ 
+![marcas](https://user-images.githubusercontent.com/44868248/146410186-aca52856-c98f-4f6b-8672-7df701cc83d9.JPG)
+
+![editmarca](https://user-images.githubusercontent.com/44868248/146410203-af392ae5-d6b3-4bc7-b993-93b93f7ae132.JPG)
+
+
+
