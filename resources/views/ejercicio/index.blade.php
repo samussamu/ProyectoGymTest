@@ -6,7 +6,15 @@
 
 
 <div class=" mx-auto sm:px-6 lg:px-8">
-
+  @if(session()->has('message'))
+  <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 mb-5 rounded relative" role="alert" id="alertMessage">
+    <strong class="font-bold">Hey Sir!</strong>
+    <span class="block sm:inline">{{session()->get('message')}}</span>
+    <span class="absolute top-0 bottom-0 right-0 px-4 py-3" >
+      <button id="closeAlert">X</button>
+    </span>
+  </div>
+  @endif
     <div class="mb-5" >
         <a href=" {{route('ejercicios.create')}}" class="mx-5 px-4 py-3 text-white bg-green-500 rounded-md">Añadir Ejercicio</a>
     </div>

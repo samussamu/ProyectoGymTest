@@ -30,7 +30,7 @@ class EjerciciosController extends Controller
         $ejercicio ->muscle = $request -> muscle;
         $ejercicio -> save();
 
-        return redirect()->route('ejercicios.index');
+        return redirect()->route('ejercicios.index')->with('message','Exercice '.$ejercicio->name.' has been added');;
     }
     
     public function destroy($id,Ejercicio $ejercicio_model){

@@ -43,6 +43,8 @@
     </nav>
 
     <main class="p-16 flex justify-center">
+
+  
     @yield('content')
    </main>
 
