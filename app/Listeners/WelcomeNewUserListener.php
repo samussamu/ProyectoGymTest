@@ -26,6 +26,6 @@ class WelcomeNewUserListener
      */
     public function handle($event)
     {
-        Mail::to($event->user->email)->send(new WelcomeMailable());
+        Mail::to($event->user->email)->send(new WelcomeMailable($event->user));
     }
 }

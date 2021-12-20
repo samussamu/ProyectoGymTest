@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Email message</h1>
-    <p> first email i send with laravel</p>
+    <h1>Welcome to gymStats {{$user->name}} !</h1>
+    <p> tesat email send with laravel</p>
 </body>
 </html>

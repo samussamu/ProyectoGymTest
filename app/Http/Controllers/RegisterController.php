@@ -7,8 +7,7 @@ use App\Models\User;
 use App\Events\NewUserHasRegisteredEvent;
 class RegisterController extends Controller
 {
-    //
-
+ 
     public function create(){
 
         return view('auth.register');
@@ -23,9 +22,10 @@ class RegisterController extends Controller
         ]);
 
         $user = User::create(request(['name','email','password']));
-        auth()->login($user);
         event(new NewUserHasRegisteredEvent($user));
-        return redirect()->to('/');
+        auth()->login($user);
+       
+       return redirect()->to('/');
 
     }
 }
