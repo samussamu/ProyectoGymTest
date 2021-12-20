@@ -50,6 +50,11 @@
           </tbody>
         </table>
     </div>
+    <!-- paginador-->
+    <div class=" px-4 py-3   paginationNav ">
+      <span>{{$arrayMarcas->links()}}</span>
+    </div>
+    <!-- end paginador-->   
 </div>
 
 @endsection

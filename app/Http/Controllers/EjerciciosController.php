@@ -10,7 +10,7 @@ class EjerciciosController extends Controller
     //
     public function index(Ejercicio $ejercicio_model)
     {
-        $arrayEjercicios = $ejercicio_model->all();
+        $arrayEjercicios = $ejercicio_model->paginate(8);
         return view("ejercicio.index",compact('arrayEjercicios'));
     }
 

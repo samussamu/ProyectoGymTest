@@ -11,7 +11,7 @@ class MarcasController extends Controller
     public function index( Marca $marca_model)
     {
         $id=auth()->user()->id;
-        $arrayMarcas=$marca_model->where('user_id',$id)->orderBy('created_at','desc')->get();
+        $arrayMarcas=$marca_model->where('user_id',$id)->orderBy('created_at','desc')->paginate(8);
         return view("marca.index",compact('arrayMarcas'));
     }
 
