@@ -5,6 +5,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\EjerciciosController;
 use App\Http\Controllers\MarcasController;
+use App\Http\Controllers\HomeController;
 use App\Mail\WelcomeMailable;
 use Illuminate\Support\Facades\Mail;
 /*
@@ -21,6 +22,8 @@ use Illuminate\Support\Facades\Mail;
 Route::get('/', function () {
     return view('home');
 })->middleware('auth');
+/*Route::get('/',[HomeController::class,'index']) ->middleware('auth');*/
+
 
 Route::get('/register',[RegisterController::class,'create'])
 ->middleware('guest')

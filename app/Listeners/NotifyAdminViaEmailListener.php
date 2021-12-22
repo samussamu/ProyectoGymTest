@@ -2,11 +2,13 @@
 
 namespace App\Listeners;
 
+use App\Events\NewUserHasRegisteredEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\WelcomeMailable;
-class WelcomeNewUserListener implements ShouldQueue
+use App\Mail\AdminNewUserMailable;
+
+class NotifyAdminViaEmailListener implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -21,11 +23,12 @@ class WelcomeNewUserListener implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param 
      * @return void
      */
-    public function handle($event)
+    public function handle( $event)
     {
-        Mail::to($event->user->email)->send(new WelcomeMailable($event->user));
+      
+        Mail::to('samutt90@gmail.com')->send(new AdminNewUserMailable($event->user));
     }
 }

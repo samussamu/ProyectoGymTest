@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Event;
 
 use App\Events\NewUserHasRegisteredEvent;
 use App\Listeners\WelcomeNewUserListener;
+use App\Listeners\NotifyAdminViaEmailListener;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 
 class EventServiceProvider extends ServiceProvider
@@ -17,8 +18,8 @@ class EventServiceProvider extends ServiceProvider
   
     protected $listen = [
         NewUserHasRegisteredEvent::class=> [
-             WelcomeNewUserListener::class,
-           // App\Listeners\NotifyAdminViaEmail::class,
+            WelcomeNewUserListener::class,
+            NotifyAdminViaEmailListener::class,
         ]
     ];
 

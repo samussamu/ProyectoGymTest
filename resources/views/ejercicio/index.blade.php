@@ -4,19 +4,16 @@
 
 @section('content')
 
-
 <div class=" mx-auto sm:px-6 lg:px-8">
+<!-- Alert component-->
   @if(session()->has('message'))
-  <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 mb-5 rounded relative" role="alert" id="alertMessage">
-    <strong class="font-bold">Hey Sir!</strong>
-    <span class="block sm:inline">{{session()->get('message')}}</span>
-    <span class="absolute top-0 bottom-0 right-0 px-4 py-2" >
-
-      <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-1 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded"id="closeAlert">X</button>
-
-    </span>
-  </div>
+  <x-alert color="green">
+    <x-slot name="slot1">
+    {{session()->get('message')}}
+    </x-slot>
+  </x-alert>
   @endif
+<!--End  Alert -->
     <div class="mb-5" >
         <a href=" {{route('ejercicios.create')}}" class="mx-5 px-4 py-3 text-white bg-green-500 rounded-md">Añadir Ejercicio</a>
     </div>
@@ -59,20 +56,15 @@
           </tbody>
         </table>
     </div>
-    <!-- paginador-->
-    <div class=" px-4 py-3   paginationNav ">
-      <span>{{$arrayEjercicios->links()}}</span>
-    </div>
-    <!-- end paginador-->
+   <!--paginator-->
+    <x-paginator>
+      <x-slot name="slot1">
+        {{$arrayEjercicios->links()}}
+      </x-slot>
+    </x-paginator>
+
+    <!-- end paginator-->
 </div>
-<style>
- .paginationNav{}
 
-</style>
 
-<script>
-$(document).ready(function () {
-  $("#closeAlert").click(function(){
-$("#alertMessage").toggle();})});
-</script>
 @endsection

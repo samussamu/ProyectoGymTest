@@ -14,6 +14,6 @@ class EjercicioSeeder extends Seeder
     public function run()
     {
 
-        Ejercicio::factory(6)->create();
+        Ejercicio::factory(10)->create();
     }
 }

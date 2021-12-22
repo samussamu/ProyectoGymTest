@@ -6,7 +6,15 @@
 
 
 <div class=" mx-auto sm:px-6 lg:px-8">
-
+  <!-- Alert component-->
+  @if(session()->has('message'))
+  <x-alert color="green">
+    <x-slot name="slot1">
+    {{session()->get('message')}}
+    </x-slot>
+  </x-alert>
+  @endif
+<!--End  Alert -->
     <div class="mb-5" >
         <a href=" {{route('marcas.create')}}" class="mx-5 px-4 py-3 text-white bg-green-500 rounded-md">Añadir Marca</a>
     </div>
@@ -51,9 +59,11 @@
         </table>
     </div>
     <!-- paginador-->
-    <div class=" px-4 py-3   paginationNav ">
-      <span>{{$arrayMarcas->links()}}</span>
-    </div>
+    <x-paginator>
+      <x-slot name="slot1">
+        {{$arrayMarcas->links()}}
+      </x-slot>
+    </x-paginator>
     <!-- end paginador-->   
 </div>
 

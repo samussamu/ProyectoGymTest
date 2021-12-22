@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Marca;
-
+use App\Models\Image;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -51,5 +51,11 @@ class User extends Authenticatable
     public function marcas()
     {
         return $this->hasMany(Marca::class);
+    }
+
+    //one to one polimorph relation
+
+    public function image(){
+        return $this->morphOne(Image::class,'imageable');
     }
 }
