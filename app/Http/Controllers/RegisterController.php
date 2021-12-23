@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Events\NewUserHasRegisteredEvent;
+use App\Events\SendStatsEvent;
 class RegisterController extends Controller
 {
  
@@ -22,7 +23,8 @@ class RegisterController extends Controller
         ]);
 
         $user = User::create(request(['name','email','password']));
-        event(new NewUserHasRegisteredEvent($user));
+        
+       event(new NewUserHasRegisteredEvent($user));
         auth()->login($user);
        
        return redirect()->to('/');

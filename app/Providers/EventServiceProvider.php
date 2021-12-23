@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Event;
 use App\Events\NewUserHasRegisteredEvent;
 use App\Listeners\WelcomeNewUserListener;
 use App\Listeners\NotifyAdminViaEmailListener;
+
+use App\Events\SendStatsEvent;
+use App\Listeners\SendStatsListener;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 
 class EventServiceProvider extends ServiceProvider
@@ -20,6 +23,9 @@ class EventServiceProvider extends ServiceProvider
         NewUserHasRegisteredEvent::class=> [
             WelcomeNewUserListener::class,
             NotifyAdminViaEmailListener::class,
+        ],
+        SendStatsEvent::class=>[
+            SendStatsListener::class,
         ]
     ];
 
