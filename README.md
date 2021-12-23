@@ -84,4 +84,9 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ![editmarca](https://user-images.githubusercontent.com/44868248/146410203-af392ae5-d6b3-4bc7-b993-93b93f7ae132.JPG)
 
 
+**Useful Comands**
 
+php artisan queue:work & -> keeps the queue work on the background
+php artisan queue:work > storage/longs/jobs.log &-> save the log of jobs in the job.log file 
+jobs -l -> gives you the list of jobs and their id
+kill id-job -> finish the job process
