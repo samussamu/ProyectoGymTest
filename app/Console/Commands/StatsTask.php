@@ -6,7 +6,8 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Events\SendStatsEvent;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MonthlyMailable;
 
 class StatsTask extends Command
 {
@@ -45,7 +46,7 @@ class StatsTask extends Command
         $texto="[".date("Y-m-d H:i:s")."]: Ejecutando Task ";
         Storage::append("archivo.txt", $texto);
         $users->each(function($user){
-            event(new SendStatsEvent($user));
+            Mail::to($user->email)->queue(new MonthlyMailable($user));
             $texto="[".date("Y-m-d H:i:s")."]: Email enviado al usuario/email: ".$user->email;
             Storage::append("archivo.txt", $texto);
         });
