@@ -48,6 +48,7 @@ Route::get('/logout',[SessionsController::class,'destroy'])
 
 
 Route::resource('ejercicios', EjerciciosController::class)->middleware('auth');
+
 Route::resource('marcas', MarcasController::class)->middleware('auth');
 
 Route::get('contactanos',function(){

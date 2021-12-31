@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\UserController;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::apiResource('users',UserController::class);
+// to get the user image
+Route::get('/userImage/{user}', function (User $user) {
+    return $user->image;
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
