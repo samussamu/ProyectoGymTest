@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+
 class UserController extends Controller
 {
     /**
@@ -18,7 +20,7 @@ class UserController extends Controller
       
         $users= $user_model->all();
 
-        return  $users;
+        return  response()->json($users,200);;
     }
 
     /**
@@ -29,16 +31,69 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user= new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password=bcrypt($request->password);
-        $user->remember_token=Str::random(10);
-
-        $user->save();
-        return response()->json($user,201);
+       
     }
+    
+    public function logout(Request $request){
+        auth()->user()->tokens()->delete();
+        
+        return [
+            'mesage'=>'tokens removed, loged out'
+        ];
+    }
+    public function Register(Request $request)
+    {
+        $request->validate([
+            'name'=>'required|string',
+            'email'=>'required|unique:users,email',
+            'password'=>'required|confirmed'
+        ]);
+        /*
+        $user= new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password=bcrypt($request->input('password'));
+        //$user->remember_token=Str::random(10); */
+        $user = User::create([
+            'name'=> $request->input('name'),
+            'email'=> $request->input('email'),
+            'password'=>bcrypt($request->input('password'))
+        ]);
+        $token = $user->createToken('myapptoken')->plainTextToken;
 
+        
+
+        $response= [
+            'user'=>$user,
+            'token'=>$token
+        ];
+       
+        return response()->json($response,201);
+    }
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email'=>'required|email',
+            'password'=>'required'
+        ]);
+      
+        //is this dangerous ? for sql injection ? how should i do it properly
+        $user = User::where('email',$request->input('email'))->first();
+
+        if( !$user || !Hash::check($request->input('password'),$user->password)) {
+            return response([
+                'message' => 'bad creds'
+            ], 401);
+        };
+        $token = $user->createToken('myapptoken')->plainTextToken;
+
+        $response= [
+            'user'=>$user,
+            'token'=>$token
+        ];
+       
+        return response()->json($response,201);
+    }
     /**
      * Display the specified resource.
      *
@@ -47,9 +102,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $userComplete=array_merge(json_decode($user, true),json_decode($user->image, true));
-        
-        return response()->json($userComplete, 200);
+      
+        $user->load('image');
+        return response()->json($user->toArray(), 200);
     }
   
     /**
@@ -61,8 +116,12 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $user->name = $request->name;
-        $user->email = $request->email;
+        /*
+        $user = User::find($user->id);
+        $user->update($request->all())
+        */
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
         $user->save();
         return response()->json($user);
     }
@@ -78,9 +137,15 @@ class UserController extends Controller
          $user->delete();
         return response()->json($user,204);
     }
+     /**
+     * Search by email.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function search( Request $request)
     {
-        $user=User::where('email', $request->email)->first();
+        $user=User::where('email', 'like','%'.$request->input('email').'%')->get();
        return response()->json($user, 200);
      }
 }
